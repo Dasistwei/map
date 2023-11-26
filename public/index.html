@@ -21,14 +21,26 @@
   <div class="result"></div>
 </body>
 <script>
-  let map = L.map('map').setView([51.505, -0.09], 13);
-
   let result = document.querySelector(".result")
+  // let map = L.map('map').setView([51.2150, -171.5059], 13);
+  var map = L.map('map', {
+    minZoom: 1,
+    maxZoom: 1
+});
 
-  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 19,
-    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+var cartodbAttribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="https://carto.com/attribution">CARTO</a>';
+
+var positron = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
+    attribution: cartodbAttribution
 }).addTo(map);
+
+map.setView([0, 0], 0);
+
+
+//   L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+//     maxZoom: 19,
+//     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+// }).addTo(map);
 
   const fetchISSData = async() =>{
     let data= await fetch("http://api.open-notify.org/iss-now.json").then(data=>data.json())
